@@ -9,7 +9,7 @@ type CreateLoggerOptions = LoggerOptions & {
 export const createLogger = (options: CreateLoggerOptions): Logger => {
     const { name, ...rest } = options
 
-    const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === "development"
+    const isDev = (!process.env.NODE_ENV || process.env.NODE_ENV === "development") && process.env.PRETTY_LOGS === "true"
     const transport = isDev
         ? {
             target: "pino-pretty",

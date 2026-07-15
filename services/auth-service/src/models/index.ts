@@ -6,3 +6,4 @@ export const initModels = async () => {
 }
 
 export * from "./user-credentials.model"
+export * from "./refresh-token.model"

@@ -8,6 +8,8 @@ import { pool } from "@/db"
 const main = async () => {
     try {
         await initModels()
+        const dbUrl = new URL(env.AUTH_DB_URL)
+        logger.info({ port: Number(dbUrl.port) || 5432 }, "Auth database is running")
 
         const app = createApp()
         const server = createServer(app)

@@ -2,10 +2,10 @@ import { z } from "zod"
 import { HttpError } from "../errors/http-error"
 
 import type { NextFunction, Request, Response } from "express"
-import { AnyZodObject, ZodError, ZodTypeAny } from "zod/v3"
+import { ZodError, ZodType } from "zod"
 import { error } from "node:console"
 
-type Schema = AnyZodObject | ZodTypeAny
+type Schema = ZodType
 type ParamsRecord = Record<string, string>
 type QueryRecord = Record<string, string>
 
@@ -16,7 +16,7 @@ export interface RequestValidationSchemas {
 }
 
 const formatedError = (error: ZodError) =>
-    error.errors.map((issue) => ({
+    error.issues.map((issue) => ({
         path: issue.path.join("."),
         message: issue.message
     }))
