@@ -1,6 +1,7 @@
 import express, { type Application } from "express"
 import cors from "cors"
 import helmet from "helmet"
+import { errorHandler } from "@/middleware/error-handler"
 
 export const createApp = (): Application => {
     const app = express()
@@ -17,6 +18,8 @@ export const createApp = (): Application => {
     app.use((_req, res) => {
         res.status(404).json({ message: "Not Found" })
     })
+
+    app.use(errorHandler)
 
     return app
 }

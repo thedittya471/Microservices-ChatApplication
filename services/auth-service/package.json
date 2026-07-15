@@ -12,7 +12,10 @@
     "lint": "eslint \"src/**/*.ts\"",
     "typecheck": "tsc --noEmit --project tsconfig.json",
     "test": "echo \"No tests yet\"",
-    "format": "prettier --check \"src/**/*.ts\""
+    "format": "prettier --check \"src/**/*.ts\"",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push"
   },
   "keywords": [],
   "author": "",
@@ -23,11 +26,15 @@
     "@chatapp/common": "workspace:*",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "express": "^5.2.1",
-    "helmet": "^8.3.0"
+    "helmet": "^8.3.0",
+    "pg": "^8.22.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6"
+    "@types/express": "^5.0.6",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10"
   }
 }

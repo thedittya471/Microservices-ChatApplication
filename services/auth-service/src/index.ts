@@ -2,9 +2,13 @@ import { createApp } from "@/app"
 import { createServer } from "node:http"
 import { env } from "./config/env"
 import { logger } from "./utils/logger"
+import { initModels } from "@/models"
+import { pool } from "@/db"
 
 const main = async () => {
     try {
+        await initModels()
+
         const app = createApp()
         const server = createServer(app)
 
@@ -13,7 +17,7 @@ const main = async () => {
         const shutdown = () => {
             logger.info("Shutting down auth service...")
 
-            Promise.all([])
+            Promise.all([pool.end()])
                 .catch((error: unknown) => {
                     logger.error({ error }, "Error during shutdown tasks")
                 })
@@ -23,7 +27,7 @@ const main = async () => {
         }
 
         process.on("SIGINT", shutdown)
-        process.on("DIGTERM", shutdown)
+        process.on("SIGTERM", shutdown)
 
         server.listen(port, () => {
             logger.info({ port }, "Auth service is running")
